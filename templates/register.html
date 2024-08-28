@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/5.0.9/jquery.inputmask.min.js" integrity="sha512-F5Ul1uuyFlGnIT1dk2c4kB4DBdi5wnBJjVhL7gQlGh46Xn0VhvD8kgxLtjdZ5YN83gybk/aASUAlpdoWUjRR3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        $(document).ready(function(){
+            $("input[name='phone']").inputmask({
+                mask: "(999) 999 - 9999",
+                placeholder: " ", 
+                showMaskOnHover: false,
+                showMaskOnFocus: true
+            });
+        });
+    </script>
+</head>
+<body>
+    
+
+    <form method="POST" action="">
+        <h1>Register</h1>
+        {{ form.hidden_tag() }}
+        <div class="fields">
+        <p>
+            <span class="req">*</span> {{ form.username.label }}<br>
+            {{ form.username }} {% for error in form.username.errors %} <br> <span class="error">{{ error }}</span> {% endfor %}            
+        </p>
+        <p>
+            <span class="req">*</span> {{ form.password.label }}<br>
+            {{ form.password }} {% for error in form.password.errors %} <br> <span class="error">{{ error }}</span> {% endfor %}
+        </p>
+        <p>
+            <span class="req">*</span> {{ form.confirm_password.label }}<br>
+            {{ form.confirm_password }} {% for error in form.confirm_password.errors %} <br> <span class="error">{{ error }}</span> {% endfor %}
+        </p>
+        <p>
+            <span class="req">*</span> {{ form.first_name.label }}<br>
+            {{ form.first_name }} {% for error in form.first_name.errors %} <br> <span class="error">{{ error }}</span> {% endfor %}
+        </p>
+        <p>
+            <span class="req">*</span> {{ form.last_name.label }}<br>
+            {{ form.last_name }} {% for error in form.last_name.errors %} <br> <span class="error">{{ error }}</span> {% endfor %}
+        </p>
+        <p>
+            <span class="req">*</span> {{ form.email.label }}<br>
+            {{ form.email }} {% for error in form.email.errors %} <br> <span class="error">{{ error }}</span> {% endfor %}
+        </p>
+        <p>
+            {{ form.phone.label }}<br>
+            {{ form.phone }} {% for error in form.phone.errors %} <br> <span class="error">{{ error }}</span> {% endfor %}
+        </p>
+        <p>
+            {{ form.dob.label }}<br>
+            {{ form.dob }} {% for error in form.dob.errors %} <br> <span class="error">{{ error }}</span> {% endfor %}
+        </p>
+        </div>
+        <p>
+            {{ form.submit }}            
+        </p>
+        <a href="{{url_for('login')}}">Already have an account? Login</a><br>
+    </form>
+
+</body>
+</html>

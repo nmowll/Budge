@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body {
+    background-color: #4A4A4F;
+    margin: 0px;
+}
+
+#return_home {
+    position: absolute;
+    left: 0px; /* Adjust as needed */
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #4589ff;
+    border-radius: 0px 20px 20px 0px;
+    color: white;
+    border: none;
+    padding: 10px 20px 10px 10px;
+    cursor: pointer;
+    font-family: "Poppins";
+    font-size: 14px;
+    transition: padding-right 0.1s ease, background-color 0.1s ease;
+    transform-origin: left center;
+}
+
+#return_home:hover {
+    background-color: #5896ff; /* Darker shade on hover */
+    padding-right: 40px; /* Increase padding on the right */
+}
+
+.title {
+    color:white;
+    text-align: center;
+    font-weight: bold;
+    font-size: 30px;
+    font-family: "Poppins";
+    justify-content: center;
+    margin-bottom: 20px}
+
+.text2 {
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    font-family: "Poppins";
+}
+
+.text3 {
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    font-family: "Poppins";
+    margin: 10px;
+}
+
+.text4 {
+    color: white;
+    font-size: 12px;
+    font-weight: normal;
+    font-family: "Poppins";
+    margin: 10px;
+}
+
+.dropdown {
+    margin-bottom: 30px;
+    margin-top: 20px;
+}
+
+.Select-control {
+    background-color:#2b2b36 !important;
+    border-color: #2b2b36 !important;
+    font-family: "Poppins";
+    font-size: 14px;
+}
+
+.Select-value-label {
+    color:white !important;
+}
+
+.VirtualizedSelectOption {
+    background-color: #2b2b36 !important;
+    color: white !important;
+    font-family: "Poppins";
+    font-size: 14px;
+}
+
+.VirtualizedSelectFocusedOption {
+    background-color: #3e3e52 !important;
+}
+  

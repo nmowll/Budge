@@ -1,0 +1,809 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Poppins', sans-serif;
+    background-color: #1E1E24; 
+}
+
+.container {
+    display: flex;
+    height: 100vh; /* Full viewport height */
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two equal-width columns */
+    grid-template-rows: auto auto; /* Auto height for rows */
+    gap: 10px; /* Space between grid items */
+    padding: 10px;
+    box-sizing: border-box;
+    height: 100vh; /* Full viewport height */
+    margin-right: 0;
+    margin-left: auto;
+}
+
+.sidebar {
+    width: 14vw; /* Width of the sidebar */
+    background-color: #4589ff; /* Sidebar background color */
+    padding: 20px 0px 20px 20px;
+    position: fixed;
+    height: 96vh;
+    top: 10px;
+    left: 10px;
+    bottom: 10px;
+    box-sizing: border-box;
+    overflow: hidden;
+    border-radius: 40px 40px 40px 40px;
+}
+
+.sidebar h2 {
+    margin-top: 0;
+    font-size: 1.8em;
+    color: white; 
+    margin-right: 15px;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar ul li {
+    margin-bottom: 25px;
+}
+
+.sidebar ul li a {
+    display: block; /* Ensure the background color covers the entire area */
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    padding-left: 48px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-radius: 40px 0 0 40px; /* Rounded corners for the link background */
+    transition: background-color 0.2s ease, padding-left 0.2s ease, background-position 0.2s ease;/* Smooth transition */
+    text-align: left;
+    margin-left: 0;
+    font-size: 0.7em;
+    background-position: 15px center; /* Position the icon 20px from the left */
+    background-repeat: no-repeat; /* Ensure the icon doesn't repeat */
+}
+
+.sidebar ul li a:hover {
+    background-color: #5896ff; 
+    padding-left: 53px;
+    background-position: 22px;
+}
+
+.sidebar ul li a.current-page {
+    background-color: #1E1E24; /* Dark background to blend in with the page */
+    color: white; /* Keep text color white for contrast */
+}
+
+.content {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    margin: 0;
+    margin-left: 12vw;
+    font-size: 1.5em;
+}
+
+h1 {
+    font-size: 2em;
+    margin-bottom: 10px;
+    margin-top: 0px;
+    color: white; 
+    text-align: center;
+}
+
+h3 {
+    font-size: 1em;
+    margin:0;
+    color: white; 
+    text-align: center;
+}
+
+form {
+    background-color: #2b2b36;
+    padding: 30px;
+    border-radius: 20px;
+    width: 300px;
+    text-align: center;
+    font-family: 'Poppins';
+    color: white;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.form-small {
+    background-color: #2b2b36;
+    text-align: center;
+    font-family: 'Poppins';
+    color: white;
+    font-size: 1em;
+    font-weight: bold;
+    align-items: center; /* Center-align the form elements */
+    height: 100%; /* Make the form fill the entire grid item */
+    width: 100%; /* Ensure the form takes the full width of the grid item */
+    box-sizing: border-box;
+    margin:0;
+    padding:3px;
+    padding-top: 5px;
+}
+
+.form-small p {
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+input[type="submit"].del {
+    width: 75px;
+    padding: 2px;
+    margin: 8px;
+    margin-left: 0;
+    padding-left: 0;
+    background-color: #fa4d56;
+    border: none;
+    border-radius: 20px;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    font-family: 'Poppins';
+    color: white;
+}
+
+input[type="submit"].del:hover {
+    background-color: #ff9da1;
+}
+
+button[type="button"].del {
+    width: 75px;
+    padding: 2px;
+    margin: 8px;
+    margin-left: 30%;
+    padding-left: 0;
+    background-color: #fa4d56;
+    border: none;
+    border-radius: 20px;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    font-family: 'Poppins';
+    color: white;
+}
+
+button[type="button"].edit:hover {
+    background-color: #6e6e8b;
+}
+
+button[type="button"].edit {
+    width: 75px;
+    padding: 2px;
+    margin: 8px;
+    margin-left: 30%;
+    padding-left: 0;
+    background-color: #3e3e52;
+    border: none;
+    border-radius: 20px;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    font-family: 'Poppins';
+    color: white;
+}
+
+button[type="button"].del:hover {
+    background-color: #ff9da1;
+}
+
+input[type="submit"].submit_small {
+    width: 150px;
+    padding: 5px;
+    background-color: #4589ff;
+    border: none;
+    border-radius: 20px;
+    font-size: 0.7em;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    font-family: 'Poppins';
+    color: white;
+    margin-top: 0;
+    text-align: center;
+}
+
+input[type="submit"].submit_all {
+    width: 150px;
+    padding: 5px;
+    background-color: #4589ff;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    font-size: 0.7em;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    font-family: 'Poppins';
+    color: white;
+    margin:0;
+}
+
+.bottom {
+    display: flex;
+    width: 100%;
+    position: absolute;
+    bottom: 20px;
+    right: 3px;
+    justify-content: center;
+}
+
+input[type="submit"].submit_small:hover {
+    background-color: #83b1ff; /* Darker shade on hover */
+}
+
+.grid-item {
+    background-color: #2b2b36;
+    border-radius: 20px;
+    padding: 10px;
+    color: white;
+    height: 48vh;
+    width: 35vw;
+    box-sizing: border-box; /* Include padding and border in the element's width/height */
+    overflow: hidden; /* Prevent content from spilling out */
+}
+
+.grid-content {
+    grid-column: 2 / 3; /* Span across both columns */
+    width: 60vw;
+    background-color: #2b2b36;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content:flex-start;
+    height: 100%; /* Ensures that the grid content fills the entire height of the grid item */
+    padding: 10px;
+    position: relative;
+}
+
+.grid-content-top {
+    grid-column: 2 / 3; /* Span across both columns */
+    width: 60vw;
+    background-color: #2b2b36;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100%; /* Ensures that the grid content fills the entire height of the grid item */
+    padding: 10px;
+}
+
+.grid-form {
+    grid-column: 1 / 2; /* Second column */
+    width: 20vw;
+    display: flex;
+    flex-direction: column;
+    justify-content:flex-start;
+    position: relative;
+    margin-right: 0;
+    margin-left: auto;
+}
+
+.fields {
+    overflow-y: auto;
+    max-height: 28vh;
+    padding: 10px; /* Optional: Adds padding inside the scrollable fields */
+    font-size: 0.8em;
+    margin: 0;
+    justify-content:flex-start;
+    position: relative;
+    border-radius: 20px;
+}
+
+.fields_bigger {
+    overflow-y: auto;
+    max-height: 38vh;
+    padding: 10px; /* Optional: Adds padding inside the scrollable fields */
+    font-size: 0.8em;
+    margin: 0;
+    justify-content:flex-start;
+    position: relative;
+    border-radius: 20px;
+}
+
+.fields ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.fields_bigger ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.fields li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px;
+    border-bottom: 1px solid #3e3e52;
+    margin:0;
+}
+
+.fields_bigger li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px;
+    border-bottom: 1px solid #3e3e52;
+    margin:0;
+}
+
+.transaction-text {
+    flex: 1 1;
+    text-align: left;
+    color: white;
+    font-size: 0.9em;
+    margin-right: 10px;
+}
+
+.delete-form {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    width: 0;
+}
+
+#submit_all_form {
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.fields ul li form {
+    margin: 0; /* Remove any margin from the form element */
+    padding: 4px;
+}
+
+.fields_bigger ul li form {
+    margin: 0; /* Remove any margin from the form element */
+    padding: 4px;
+}
+
+form p {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+input[type="text"], input[type="password"], input[type="number"] {
+    width: 90%;
+    padding: 10px;
+    margin-top: 5px;
+    background-color: #3e3e52;
+    border-radius: 5px;
+    font-size: 0.9em;
+    font-family: 'Poppins';
+    color: white;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
+input[name="phone"] {
+    width: 90%;
+    padding: 10px;
+    margin-top: 5px;
+    background-color: #3e3e52;
+    border-radius: 5px;
+    font-size: 0.9em;
+    font-family: 'Poppins';
+    color: white;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+select {
+    width: 90%;
+    padding: 10px;
+    margin-top: 5px;
+    background-color: #3e3e52;
+    border-radius: 5px;
+    font-size: 0.9em;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+select:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+select option {
+    background-color: #3e3e52;
+    color: white;
+}
+
+input[type="date"] {
+    /* Add a custom background and border if needed */
+    width: 90%;
+    background-color: #3e3e52; /* Ensures the background is solid white */
+    border-radius: 5px;
+    padding: 10px;
+    color: white;
+    margin-top: 5px;
+    font-size: 0.9em;
+    font-family: 'Poppins';
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    color: white;
+    filter: invert(1);
+}
+
+input::placeholder {
+    color: rgb(153, 153, 162);
+}
+
+textarea {
+    width: 90%;     
+    height: 80px;
+    color: white;
+    background-color: #3e3e52;
+    padding: 10px;
+    font-family: 'Poppins';
+    font-size: 0.9em;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    border-radius: 5px;
+    resize:none;
+    box-sizing: border-box;
+    margin-top: 5px;
+}
+
+textarea::placeholder {
+    color: rgb(153, 153, 162);
+}
+
+input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #4589ff;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    font-family: 'Poppins';
+    color: white;
+    margin-top: 0;
+}
+
+input[type="submit"]:hover {
+    background-color: #83b1ff; /* Darker shade on hover */
+}
+
+a {
+    display: inline-block;
+    text-decoration: none;
+    color: #4589ff;
+    font-weight: 500;
+    font-size: 0.7em;
+    text-align: center;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.fields::-webkit-scrollbar {
+    width: 8px;
+}
+
+.fields::-webkit-scrollbar-thumb {
+    background-color: #3e3e52;
+    border-radius: 10px;
+}
+
+.fields::-webkit-scrollbar-track {
+    background-color: #1E1E24;
+    border-radius: 10px;
+}
+
+.fields_bigger::-webkit-scrollbar {
+    width: 8px;
+}
+
+.fields_bigger::-webkit-scrollbar-thumb {
+    background-color: #3e3e52;
+    border-radius: 10px;
+}
+
+.fields_bigger::-webkit-scrollbar-track {
+    background-color: #1E1E24;
+    border-radius: 10px;
+}
+
+.transaction-table {
+    width: 100%; /* Make the table take up the full width of its container */
+    border-collapse: collapse; /* Ensure borders are collapsed */
+    font-size: 0.9em; /* Adjust font size */
+    color: white;
+    table-layout: fixed; /* Prevent the table from resizing columns */
+}
+
+.transaction-table th, .transaction-table td {
+    padding: 5px; /* Add padding for spacing */
+    text-align: left; /* Align text to the left */
+    border-bottom: 1px solid #3e3e52; /* Border between rows */
+}
+
+.transaction-table th {
+    background-color: #3e3e52; /* Header background color */
+    font-weight: bold; /* Bold font for headers */
+}
+
+.transaction-table td {
+    word-wrap: break-word; /* Ensure text wraps within the cell */
+    margin: 0;
+    padding: 0;
+}
+
+.transaction-table td form {
+    margin: 0;
+    padding: 0;
+}
+
+.error {
+    color: #fa4d56;
+    font-family: "Poppins";
+    font-size: 0.9em;
+    text-align: center;
+    font-weight: normal;
+}
+
+.confirm_delete {
+    background-color: #2b2b36; /*#2b2b36*/
+    padding:20px;
+    width: 75%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+}
+
+.edit_box {
+    background-color: #2b2b36;
+    padding:20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-top: auto;
+    font-size: 0.8em;
+    font-weight: normal;
+    margin-bottom: 0;
+}
+
+input[type="submit"].confirm_delete_button {
+    width: 100px;
+    padding: 8px;
+    margin: 8px;
+    background-color: #fa4d56;
+    border: none;
+    border-radius: 20px;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    font-family: 'Poppins';
+    color: white;
+}
+
+input[type="submit"].confirm_delete_button:hover {
+    background-color: #ff9da1;
+}
+
+button[type="button"].pop-up_cancel {
+    width: 100px;
+    padding: 8px;
+    margin: 8px;
+    background-color: #3e3e52;
+    border: none;
+    border-radius: 20px;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    font-family: 'Poppins';
+    color: white;
+}
+
+button[type="button"].pop-up_cancel:hover {
+    background-color: #5f5f7c;
+}
+
+.pop-up {
+    background-color: #2b2b36;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 20px;
+    margin:15% auto; 
+    padding:20px; 
+    width:100%; 
+    max-width:500px;
+    color: white;
+    box-sizing: border-box;
+}
+
+.pop-up h2 {
+    font-size: 1.5em;
+}
+
+.apply input[type="submit"] {
+    width: 100px;
+    padding: 8px;
+    margin: 8px;
+    background-color: #4589ff;
+    border: none;
+    border-radius: 20px;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    font-family: 'Poppins';
+    color: white;
+}
+
+.apply input[type="submit"]:hover {
+    background-color: #83b1ff;
+}
+
+.pop-up .form-small {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #2b2b36;
+    text-align: center;
+    font-family: 'Poppins';
+    color: white;
+    font-size: 0.9em;
+    font-weight: bold;
+    height: 100%; /* Make the form fill the entire grid item */
+    width: 100%; /* Ensure the form takes the full width of the grid item */
+    box-sizing: border-box;
+    margin:0;
+    padding:3px;
+    padding-top: 5px;
+}
+
+.pop-up .form-small .fields {
+    width:60%;
+    font-size: 1em;
+}
+
+.req {
+    display: inline;
+    color:#4589ff;
+    font-size: 1em;
+    margin: 0;
+    margin-left: 3px;
+}
+
+.bigtext {
+    font-size: 5em;
+    margin-bottom: 40px;
+}
+
+.homebutton {
+    width: 10vw;
+    padding: 10px;
+    background-color: #4589ff;
+    border: none;
+    border-radius: 20px;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: background-color 0.1s ease;
+    font-family: 'Poppins';
+    color: white;
+    margin: 20px;
+}
+
+.homebutton:hover {
+    background-color:#83b1ff; /* Darker background on hover */
+    text-decoration: none;
+}
+
+.flexcenter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.flexspread {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+ul .bottomelem {
+    width: 100%;
+    position: absolute;
+    bottom: 30px;
+    padding-left: 5px;
+}
+
+ul .bottomelem a {
+    background-size: 22px 22px; /* Adjust icon size */
+    text-align: left;
+}
+
+.homeicon {
+    background-image: url('img/icons/home_icon.png');
+    background-size: 22px 20px; /* Resize the image */
+}
+
+.dashboardicon {
+    background-image: url('img/icons/dashboard_icon.png');
+    background-size: 25px 25px;
+}
+
+.transicon {
+    background-image: url('img/icons/transactions_icon.png');
+    background-size: 25px 28px;
+}
+
+.bucketicon {
+    background-image: url('img/icons/buckets_icon.png');
+    background-size: 25px 28px;
+}
+
+.logouticon {
+    background-image: url('img/icons/logout_icon.png');
+    background-image: 25px 25px;
+}
+
+.none-value {
+    font-weight: bold;
+    color: gold;
+}
+
+h4 {
+    font-weight: normal;
+    font-size: 0.8em;
+}

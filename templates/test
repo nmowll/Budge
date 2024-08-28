@@ -1,0 +1,33 @@
+    <div class="fields_bigger">
+    <ul>
+        {% for index, transaction in enumerate(search) %}
+        <li>
+            <span class="transaction-text">{{ transaction.date }} - {{ transaction.cat_name }}: ${{ transaction.value }}</span>
+
+            <form method="POST" action="" style="display:inline;">
+                <input type="hidden" name="search_transaction_index" value="{{ index }}">
+                <button type="button" onclick="openDeleteModal('{{ index }}')" class="del">Delete</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+    </fields>
+    </div>
+    </div>
+
+    <div class="fields_bigger">
+        <ul>
+            {% for index, transaction in enumerate(search) %}
+            <li>
+                <span class="transaction-text">{{ transaction.date }} - {{ transaction.cat_name }}: ${{ transaction.value }}</span>
+    
+                <form method="POST" action="" style="display:inline;" class="delete-form">
+                    <input type="hidden" name="search_transaction_index" value="{{ index }}">
+                    <button type="button" onclick="openDeleteModal('{{ index }}')" class="del">Delete</button>
+                </form>
+            </li>
+            {% endfor %}
+        </ul>
+        </fields>
+        </div>
+        </div>

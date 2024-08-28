@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spending Categories and Buckets</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <script>
+        var removedOptions = {};
+        var removedOptionsBucket = {};
+
+        function openModalEditCat(categoryIndex, categoryName, categoryDesc, categoryGoal) {
+            document.getElementById('edit-category-index').value = categoryIndex;
+            document.getElementById('edit-category-name').value = categoryName;
+            document.getElementById('edit-category-desc').value = categoryDesc;
+            document.getElementById('edit-category-goal').value = categoryGoal;
+
+            document.getElementById('editCategory').style.display = "flex";
+        }
+        function closeModalEditCat() {
+            document.getElementById('editCategory').style.display = "none";
+        }
+        function openModalEditBucket(bucketIndex, bucketName, bucketDesc, bucketAmt) {
+            document.getElementById('edit-bucket-index').value = bucketIndex;
+            document.getElementById('edit-bucket-name').value = bucketName;
+            document.getElementById('edit-bucket-desc').value = bucketDesc;
+            document.getElementById('edit-bucket-amt').value = bucketAmt;
+
+            document.getElementById('editBucket').style.display = "flex";
+        }
+        function closeModalEditBucket() {
+            document.getElementById('editBucket').style.display = "none";
+        }
+        function openDeleteModal(categoryIndex, categoryName) {
+            document.getElementById('delete-category-index').value = categoryIndex;
+            document.getElementById('delete-category-name').value = categoryName;
+
+            var transferSelect = document.getElementById('transfer_category');
+            var options = transferSelect.options
+
+            removedOptions = {};
+            for (var i = 0; i < options.length; i++) {
+                if (options[i].value === categoryName) {
+                    removedOptions[options[i].value] = options[i].textContent;
+                    transferSelect.remove(i);
+                    break;
+                }
+            }
+
+            // Pass the category name to the template
+            document.getElementById('deleteConfirmationModalCategory').style.display = 'flex';
+        }
+        function closeModal() {
+            var transferSelect = document.getElementById('transfer_category');
+
+            for (var value in removedOptions) {
+                var option = document.createElement('option');
+                option.value = value;
+                option.textContent = removedOptions[value];
+                transferSelect.appendChild(option);
+            }
+
+            document.getElementById('deleteConfirmationModalCategory').style.display = 'none';
+        }
+        function openDeleteModalBucket(bucketIndex, bucketName) {
+            document.getElementById('delete-bucket-index').value = bucketIndex;
+            document.getElementById('delete-bucket-name').value = bucketName;
+
+            var transferSelect = document.getElementById('transfer_bucket');
+            var options = transferSelect.options
+
+            removedOptionsBucket = {};
+            for (var i = 0; i < options.length; i++) {
+                if (options[i].value === bucketName) {
+                    removedOptionsBucket[options[i].value] = options[i].textContent;
+                    transferSelect.remove(i);
+                    break;
+                }
+            }
+
+            // Pass the category name to the template
+            document.getElementById('deleteConfirmationModalBucket').style.display = 'flex';
+        }
+        function closeModalBucket() {
+            var transferSelect = document.getElementById('transfer_bucket');
+
+            for (var value in removedOptionsBucket) {
+                var option = document.createElement('option');
+                option.value = value;
+                option.textContent = removedOptionsBucket[value];
+                transferSelect.appendChild(option);
+            }
+
+            document.getElementById('deleteConfirmationModalBucket').style.display = 'none';
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <nav class="sidebar">
+            <h2>budge</h2>
+            <ul>
+                <li><a href="{{url_for('dash')}}" class="homeicon {{ 'current-page' if request.endpoint == 'dash' else '' }}">Home</a></li>
+                <li><a href="{{url_for('enterdata')}}" class="transicon {{ 'current-page' if request.endpoint == 'enterdata' else '' }}">Transactions</a></li>
+                <li><a href="{{url_for('editcategories')}}" class="bucketicon {{ 'current-page' if request.endpoint == 'editcategories' else '' }}">Buckets</a></li>
+                <li><a href="{{url_for('dashboard')}}" class="dashboardicon {{ 'current-page' if request.endpoint == 'dashboard' else '' }}">Dashboard</a></li>
+                <div class="bottomelem">
+                <li><a href="{{url_for('logout')}}" class="logouticon {{ 'current-page' if request.endpoint == 'logout' else '' }}">Logout</a></li>
+                </div>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="grid-container">
+    <div class="grid-item grid-form">
+        <h3>New Spending Category</h3>
+    
+        <form method="POST" action="" id="new_category_form" class="form-small">
+            <div class="fields">
+            {{ new_form.hidden_tag() }}
+            <p>
+                <span class="req">*</span> {{ new_form.name.label }}<br>
+                {{ new_form.name }}
+            </p>
+            <p>
+                <span class="req">*</span> {{ new_form.goal.label }}<br>
+                {{ new_form.goal }}      
+            </p>
+            <p>
+                {{ new_form.desc.label }}<br>
+                {{ new_form.desc }}            
+            </p>
+            </div>
+            <div class="bottom">
+                <input type="submit" name="new_category_form_submit" value="Add" class="submit_small">            
+            </div>
+        </form>
+    </div>
+
+    <div class="grid-item grid-content-top">
+    <h3>Spending Categories</h3>
+    <div class="fields_bigger">
+        <table class="transaction-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Bucket</th>
+                    <th>Description</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for index, category in enumerate(categories) %}
+                <tr>
+                    <td>{{ category.c_name }}</td>
+                    <td>
+                        {% if category.c_goal is none %}
+                        <span class="none-value">{{ category.c_goal }}</span>
+                        {% else %}
+                        {{ category.c_goal }}
+                        {% endif %}
+                    </td>
+                    <td>{{ category.c_desc }}</td>
+                    <td>
+                        <button type="button" onclick="openModalEditCat('{{ index }}', '{{ category.c_name }}', '{{ category.c_desc }}', '{{ category.c_goal }}')" class="edit">Edit</button>
+                    </td>
+                    <td>
+                        {% if categories|length > 1 %}
+                        <form method="POST" action="" style="display:inline;">
+                            <input type="hidden" name="category_index" value="{{ index }}">
+                            <button type="button" onclick="openDeleteModal('{{ index }}', '{{ category.c_name }}')" class="del">Delete</button>
+                        </form>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    </div>
+
+    
+    <div class="grid-item grid-form">
+        <h3>New Bucket</h3>
+    
+        <form method="POST" action="" id="new_bucket_form" class="form-small">
+            <div class="fields">
+            {{ bucket_form.hidden_tag() }}
+            <p>
+                <span class="req">*</span> {{ bucket_form.bname.label }}<br>
+                {{ bucket_form.bname }}
+            </p>
+            <p>
+                <span class="req">*</span> {{ bucket_form.bvalue.label }}<br>
+                {{ bucket_form.bvalue }}            
+            </p>
+            <p>
+                {{ bucket_form.bdesc.label }}<br>
+                {{ bucket_form.bdesc }}            
+            </p>
+            </div>
+            <div class="bottom">
+                <input type="submit" name="new_bucket_form_submit" value="Add" class="submit_small">          
+            </div>
+        </form>
+    </div>
+
+    <div class="grid-item grid-content-top">
+        <h3>Active Buckets</h3>
+        <div class="fields_bigger">
+            <table class="transaction-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Spending Target</th>
+                        <th>Description</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for index, bucket in enumerate(buckets) %}
+                    <tr>
+                        <td>{{ bucket.b_name }}</td>
+                        <td>{{ bucket.b_value }}</td>
+                        <td>{{ bucket.b_desc }}</td>
+                        <td>
+                            <button type="button" onclick="openModalEditBucket('{{ index }}', '{{ bucket.b_name }}', '{{ bucket.b_desc }}', '{{ bucket.b_value}}')" class="edit">Edit</button>
+                        </td>
+                        <td>
+                            {% if buckets|length > 1 %}
+                            <form method="POST" action="" style="display:inline;">
+                                <input type="hidden" name="bucket_index" value="{{ index }}">
+                                <button type="button" onclick="openDeleteModalBucket('{{ index }}', '{{ bucket.b_name }}')" class="del">Delete</button>
+                            </form>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    </div>
+
+    <div id="deleteConfirmationModalCategory" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background-color:rgba(0,0,0,0.5); justify-content: center; align-items: center;">
+        <div class="pop-up">
+            <h2>Confirm Deletion</h2>
+            <p>Are you sure you want to delete this spending category?</p>
+            
+            <form method="POST" action="" id="confirm_delete" class="edit_box">
+                <input type="hidden" name="category_index" id="delete-category-index">
+                <input type="hidden" name="category_name" id="delete-category-name">
+                <p>
+                <label for="transfer_category">Transfer transactions to:</label>
+                <select name="transfer_category" id="transfer_category" style="width:50%">
+                    {% for category in categories %}
+                    {% if category.c_name != category_to_delete %}
+                    <option value="{{ category.c_name }}">{{ category.c_name }}</option>
+                    {% endif %}
+                    {% endfor %}
+                </p>
+                </select>
+                <div class="confirm_delete">
+                    <button type="button" onclick="closeModal()" class="pop-up_cancel">Cancel</button>
+                    <input type="submit" name="confirm_delete" value="Delete" class="confirm_delete_button">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="deleteConfirmationModalBucket" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background-color:rgba(0,0,0,0.5); justify-content: center; align-items: center;">
+        <div class="pop-up">
+            <h2>Confirm Deletion</h2>
+            <p>Are you sure you want to delete this bucket?</p>
+            
+            <form method="POST" action="" id="confirm_delete" class="edit_box">
+                <input type="hidden" name="bucket_index" id="delete-bucket-index">
+                <input type="hidden" name="bucket_name" id="delete-bucket-name">
+                <p>
+                    <label for="transfer_category">Transfer spending categories to:</label>
+                    <select name="transfer_bucket" id="transfer_bucket" style="width:50%;">
+                        <option value="{{ None }}">{{ "None "}}</option>
+                        {% for bucket in buckets %}
+                        {% if bucket.b_name != bucket_to_delete %}
+                        <option value="{{ bucket.b_name }}">{{ bucket.b_name }}</option>
+                        {% endif %}
+                        {% endfor %}
+                </p>
+                </select>
+                <div class="confirm_delete">
+                    <button type="button" onclick="closeModalBucket()" class="pop-up_cancel">Cancel</button>
+                    <input type="submit" name="bucket_confirm_delete" value="Delete" class="confirm_delete_button">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="editCategory" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background-color:rgba(0,0,0,0.5); justify-content: center; align-items: center;">
+        <div class="pop-up">
+            <h2>Edit Spending Category</h2>
+            <form method="POST" action="" class="form-small">
+                <input type="hidden" name="category_index" id="edit-category-index">
+                <div class="fields">
+                {{ edit_forms[0].hidden_tag() }}
+
+                <p>
+                {{ edit_forms[0].name.label }}<br>
+                {{ edit_forms[0].name(id="edit-category-name") }}
+                </p>
+                <p>
+                {{ edit_forms[0].goal.label }}<br>
+                {{ edit_forms[0].goal(id="edit-category-goal") }}
+                </p>
+                <p>
+                {{ edit_forms[0].desc.label }}<br>
+                {{ edit_forms[0].desc(id="edit-category-desc") }}
+                </p>
+                </div>
+
+                <div class="confirm_delete">
+                    <button type="button" onclick="closeModalEditCat()" class="pop-up_cancel">Cancel</button>
+                    <span class="apply">{{ edit_forms[0].submit }}</span>
+                </div>
+            </form>
+            </div>
+            
+        </div>
+    </div>
+
+    <div id="editBucket" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background-color:rgba(0,0,0,0.5); justify-content: center; align-items: center;">
+        <div class="pop-up">
+            <h2>Edit Bucket</h2>
+            <form method="POST" action="" class="form-small">
+                <input type="hidden" name="bucket_index" id="edit-bucket-index">
+                <div class="fields">
+                {{ bucket_edit_forms[0].hidden_tag() }}
+                <p>
+                    {{ bucket_edit_forms[0].bname.label }}<br>
+                    {{ bucket_edit_forms[0].bname(id="edit-bucket-name") }}
+                </p>
+                <p>
+                    {{ bucket_edit_forms[0].bvalue.label }}<br>
+                    {{ bucket_edit_forms[0].bvalue(id="edit-bucket-amt") }}
+                </p>
+                <p>
+                    {{ bucket_edit_forms[0].bdesc.label }}<br>
+                    {{ bucket_edit_forms[0].bdesc(id="edit-bucket-desc") }}
+                </p>
+                </div>
+                <div class="confirm_delete">
+                    <button type="button" onclick="closeModalEditBucket()" class="pop-up_cancel">Cancel</button>
+                    <span class="apply">{{ bucket_edit_forms[0].submit }}</span>
+                </div>
+            </form>
+        </div>
+            
+    </div>
+
+    </div>
+
+</body>
+</html>

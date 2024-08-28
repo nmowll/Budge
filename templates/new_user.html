@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New User</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <form method="POST" action="">
+        <h1>Welcome</h1>
+        <h3>Getting Started</h3>
+        {{ form.hidden_tag() }}
+        <h4>To get you started, we want to generate some basic spending buckets for you. After all bill payments, what is your disposable income you want to budget for? You may skip.</h4>
+        <div class="fields">
+        <p>
+            {{ form.income.label }}<br>
+            {{ form.income }} {% for error in form.income.errors %} <br> <span class="error">{{ error }}</span> {% endfor %}          
+        </p>
+        </div>
+        <p>
+            {{ form.submit }}
+        </p>
+
+        <a href="{{url_for('dash')}}">Skip this step</a><br>
+        <a href="{{url_for('logout')}}">Logout</a><br>
+    </form>
+
+</body>
+</html>

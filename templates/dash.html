@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+<body>
+    <div class="container">
+        <nav class="sidebar">
+            <h2>budge</h2>
+            <ul>
+                <li><a href="{{url_for('dash')}}" class="homeicon {{ 'current-page' if request.endpoint == 'dash' else '' }}">Home</a></li>
+                <li><a href="{{url_for('enterdata')}}" class="transicon {{ 'current-page' if request.endpoint == 'enterdata' else '' }}">Transactions</a></li>
+                <li><a href="{{url_for('editcategories')}}" class="bucketicon {{ 'current-page' if request.endpoint == 'editcategories' else '' }}">Buckets</a></li>
+                <li><a href="{{url_for('dashboard')}}" class="dashboardicon {{ 'current-page' if request.endpoint == 'dashboard' else '' }}">Dashboard</a></li>
+                <div class="bottomelem">
+                <li><a href="{{url_for('logout')}}" class="logouticon {{ 'current-page' if request.endpoint == 'logout' else '' }}">Logout</a></li>
+                </div>
+            </ul>
+        </nav>
+        <main class="content">
+            <h1>Hi, {{ fname }}!</h1>
+        </main>
+    </div>
+</body>
+</html>

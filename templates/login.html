@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <form method="POST" action="">
+        <h1>budge</h1>
+        {{ form.hidden_tag() }}
+        <div class="fields">
+        <p>
+            {{ form.username.label }}<br>
+            {{ form.username }} {% for error in form.username.errors %} <br> <span class="error">{{ error }}</span> {% endfor %}          
+        </p>
+        <p>
+            {{ form.password.label }}<br>
+            {{ form.password }} {% for error in form.password.errors %} <br> <span class="error">{{ error }}</span> {% endfor %}            
+        </p>
+        </div>
+        <p>
+            {{ form.submit }}
+        </p>
+
+        <a href="{{url_for('register')}}">Don't have an account? Sign Up</a><br>
+    </form>
+
+</body>
+</html>
