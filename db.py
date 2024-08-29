@@ -13,7 +13,7 @@ password = os.getenv('DB_PASSWORD')
 server_name = os.getenv('DB_HOST')
 db_name = os.getenv('DB_NAME')
 
-local_connection_string = 'Driver={ODBC Driver 18 for SQL Server};Server=localhost;Database=Budge;Trusted_Connection=yes;TrustServerCertificate=yes;'
+local_connection_string = 'Driver={FreeTDS};Server=localhost;Database=Budge;Trusted_Connection=yes;TrustServerCertificate=yes;'
 db_connection_string = 'Driver={ODBC Driver 18 for SQL Server};Server=tcp:'+server_name+',1433;Database='+db_name+';Uid='+username+';Pwd='+password+';Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;'
 
 connection_string = local_connection_string
