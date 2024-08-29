@@ -16,7 +16,7 @@ db_name = os.getenv('DB_NAME')
 local_connection_string = 'Driver={ODBC Driver 18 for SQL Server};Server=localhost;Database=Budge;Trusted_Connection=yes;TrustServerCertificate=yes;'
 db_connection_string = 'Driver={ODBC Driver 18 for SQL Server};Server=tcp:'+server_name+',1433;Database='+db_name+';Uid='+username+';Pwd='+password+';Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;'
 
-connection_string = db_connection_string
+connection_string = local_connection_string
 
 class ConnectionPool:
     def __init__(self, max_connections, connection_string):
