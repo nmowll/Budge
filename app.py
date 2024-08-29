@@ -692,7 +692,5 @@ def redirect_to_home(n_clicks):
 
 
 if __name__ == '__main__':
-    from waitress import serve
-    #server.run()
-    serve(app=server, host="0.0.0.0", port=8080)
+    server.run()
 
