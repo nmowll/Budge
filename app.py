@@ -5,7 +5,6 @@ from flask_login import login_user, LoginManager, login_required, logout_user, c
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, DecimalField, DateField, SelectField, TextAreaField, SelectMultipleField, RadioField, BooleanField
 from wtforms.validators import InputRequired, Length, ValidationError, Optional, Email, EqualTo
-from flask_bcrypt import Bcrypt
 from flask_sqlalchemy import SQLAlchemy
 from wtforms.widgets import Select
 
