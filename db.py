@@ -1,4 +1,5 @@
 import pyodbc as odbc
+import pymssql
 import security
 import hashlib
 from queue import Queue
@@ -26,7 +27,8 @@ class ConnectionPool:
             self.pool.put(self._create_new_connection())
 
     def _create_new_connection(self):
-        return odbc.connect(self.connection_string)
+        #return odbc.connect(self.connection_string)
+        return pymssql.connect(server=server_name,user=username,password=password,database=db_name)
 
     def get_connection(self):
         return self.pool.get()
