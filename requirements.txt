@@ -22,7 +22,6 @@ gunicorn==23.0.0
 inflection==0.5.1
 itsdangerous==2.2.0
 jsonpointer==2.1
-mkl-service==2.4.0
 munkres==1.1.4
 openpyxl==3.0.10
 patsy==0.5.3
