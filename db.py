@@ -1,4 +1,4 @@
-import pypyodbc as odbc
+import pyodbc as odbc
 import security
 import hashlib
 from queue import Queue
